@@ -782,7 +782,11 @@ static void __init disable_pgtable_l5(void)
 {
 	pgtable_l5_enabled = false;
 	kernel_map.page_offset = PAGE_OFFSET_L4;
+#if 0
 	satp_mode = SATP_MODE_48;
+#else
+	satp_mode = SATP_MODE_58;
+#endif
 }
 
 static void __init disable_pgtable_l4(void)
@@ -830,6 +834,10 @@ static __init void set_satp_mode(uintptr_t dtb_pa)
 		disable_pgtable_l4();
 		return;
 	}
+
+#if 1
+	disable_pgtable_l5();
+#endif
 
 	create_p4d_mapping(early_p4d,
 			set_satp_mode_pmd, (uintptr_t)early_pud,
@@ -1157,7 +1165,7 @@ asmlinkage void __init setup_vm(uintptr_t dtb_pa)
 
 	/* Sanity check alignment and size */
 	BUG_ON((PAGE_OFFSET % PGDIR_SIZE) != 0);
-	BUG_ON((kernel_map.phys_addr % PMD_SIZE) != 0);
+	BUG_ON((kernel_map.phys_addr % SZ_2M) != 0);
 
 #ifdef CONFIG_64BIT
 	/*

@@ -20,7 +20,7 @@
 
 #ifdef CONFIG_64BIT
 /* Leave 2GB for kernel and BPF at the end of the address space */
-#define KERNEL_LINK_ADDR	(ADDRESS_SPACE_END - SZ_2G + 1)
+#define KERNEL_LINK_ADDR	(ADDRESS_SPACE_END - SZ_8G + 1)
 #else
 #define KERNEL_LINK_ADDR	PAGE_OFFSET
 #endif
@@ -96,7 +96,7 @@
 #define FIXADDR_TOP      PCI_IO_START
 #ifdef CONFIG_64BIT
 #define MAX_FDT_SIZE	 PMD_SIZE
-#define FIX_FDT_SIZE	 (MAX_FDT_SIZE + SZ_2M)
+#define FIX_FDT_SIZE	 (MAX_FDT_SIZE + SZ_32M)
 #define FIXADDR_SIZE     (PMD_SIZE + FIX_FDT_SIZE)
 #else
 #define MAX_FDT_SIZE	 PGDIR_SIZE
