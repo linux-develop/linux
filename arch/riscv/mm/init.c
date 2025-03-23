@@ -1165,7 +1165,7 @@ asmlinkage void __init setup_vm(uintptr_t dtb_pa)
 
 	/* Sanity check alignment and size */
 	BUG_ON((PAGE_OFFSET % PGDIR_SIZE) != 0);
-	BUG_ON((kernel_map.phys_addr % SZ_2M) != 0);
+	BUG_ON((kernel_map.phys_addr % PMD_SIZE) != 0);
 
 #ifdef CONFIG_64BIT
 	/*

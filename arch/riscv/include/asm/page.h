@@ -34,7 +34,11 @@
  * By default, CONFIG_PAGE_OFFSET value corresponds to SV57 address space so
  * define the PAGE_OFFSET value for SV48 and SV39.
  */
+#if 1
+#define PAGE_OFFSET_L4		_AC(0xffaf800000000000, UL)
+#else
 #define PAGE_OFFSET_L4		_AC(0xffffaf8000000000, UL)
+#endif /* 1 */
 #define PAGE_OFFSET_L3		_AC(0xffffffd600000000, UL)
 #else
 #define PAGE_OFFSET		_AC(CONFIG_PAGE_OFFSET, UL)

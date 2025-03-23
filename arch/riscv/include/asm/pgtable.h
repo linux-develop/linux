@@ -20,7 +20,7 @@
 
 #ifdef CONFIG_64BIT
 /* Leave 2GB for kernel and BPF at the end of the address space */
-#define KERNEL_LINK_ADDR	(ADDRESS_SPACE_END - SZ_8G + 1)
+#define KERNEL_LINK_ADDR	(ADDRESS_SPACE_END - SZ_2G + 1)
 #else
 #define KERNEL_LINK_ADDR	PAGE_OFFSET
 #endif
