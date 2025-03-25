@@ -22,6 +22,7 @@
 #include "image-vars.h"
 
 #include <linux/sizes.h>
+#include <vdso/page.h>
 OUTPUT_ARCH(riscv)
 ENTRY(_start)
 
@@ -33,7 +34,7 @@ SECTIONS
 	. = LOAD_OFFSET;
 	_start = .;
 	HEAD_TEXT_SECTION
-	. = ALIGN(PAGE_SIZE);
+	. = ALIGN(1<<14);
 
 	.text : {
 		_text = .;
@@ -129,7 +130,7 @@ SECTIONS
 	. = ALIGN(SECTION_ALIGN);
 	_data = .;
 
-	RW_DATA(L1_CACHE_BYTES, PAGE_SIZE, THREAD_ALIGN)
+	RW_DATA(L1_CACHE_BYTES, 1<<14, THREAD_ALIGN)
 	.sdata : {
 		__global_pointer$ = . + 0x800;
 		*(.sdata*)
@@ -156,7 +157,7 @@ SECTIONS
 	/* End of data section */
 	_edata = .;
 
-	BSS_SECTION(PAGE_SIZE, PAGE_SIZE, 0)
+	BSS_SECTION(1<<14, 1<<14, 0)
 
 #ifdef CONFIG_EFI
 	. = ALIGN(PECOFF_SECTION_ALIGNMENT);
