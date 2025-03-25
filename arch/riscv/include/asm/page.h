@@ -35,7 +35,7 @@
  * define the PAGE_OFFSET value for SV48 and SV39.
  */
 #if 1
-#define PAGE_OFFSET_L4		_AC(0xffaf800000000000, UL)
+#define PAGE_OFFSET_L4		_AC(0xfebf800000000000, UL)
 #else
 #define PAGE_OFFSET_L4		_AC(0xffffaf8000000000, UL)
 #endif /* 1 */

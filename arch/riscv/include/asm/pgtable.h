@@ -67,12 +67,13 @@
  */
 #define VA_BITS_SV32 32
 #ifdef CONFIG_64BIT
-#define VA_BITS_SV39 41
-#define VA_BITS_SV48 50
-#define VA_BITS_SV57 59
+#define VA_BITS_SV39 39
+#define VA_BITS_SV48 48
+#define VA_BITS_SV58 58
+#define VA_BITS_SV57 57
 
 #define VA_BITS		(pgtable_l5_enabled ? \
-				VA_BITS_SV57 : (pgtable_l4_enabled ? VA_BITS_SV48 : VA_BITS_SV39))
+				VA_BITS_SV57 : (pgtable_l4_enabled ? VA_BITS_SV58 : VA_BITS_SV39))
 #else
 #define VA_BITS		VA_BITS_SV32
 #endif
@@ -89,7 +90,7 @@
  */
 #define vmemmap		((struct page *)VMEMMAP_START - vmemmap_start_pfn)
 
-#define PCI_IO_SIZE      SZ_16M
+#define PCI_IO_SIZE      SZ_256M
 #define PCI_IO_END       VMEMMAP_START
 #define PCI_IO_START     (PCI_IO_END - PCI_IO_SIZE)
 
