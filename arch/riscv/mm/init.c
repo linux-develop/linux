@@ -966,10 +966,11 @@ static void __init create_kernel_page_table(pgd_t *pgdir, bool early)
 	uintptr_t va, end_va;
 
 	end_va = kernel_map.virt_addr + kernel_map.size;
-	for (va = kernel_map.virt_addr; va < end_va; va += PMD_SIZE)
+	for (va = kernel_map.virt_addr; va < end_va;
+			va += (early ? PMD_SIZE : PAGE_SIZE))
 		create_pgd_mapping(pgdir, va,
 				   kernel_map.phys_addr + (va - kernel_map.virt_addr),
-				   PMD_SIZE,
+				   early ? PMD_SIZE : PAGE_SIZE,
 				   early ?
 					PAGE_KERNEL_EXEC : pgprot_from_va(va));
 }
